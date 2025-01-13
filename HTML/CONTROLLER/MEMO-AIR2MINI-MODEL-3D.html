@@ -30,9 +30,16 @@
       }
 
       h1 {
-        font-size: 4vw;
+        font-size: 6vw;
         color: #fff;
         margin-top: 10px;
+      }
+
+      /* Responsividade do texto do cabeçalho */
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 3vw;
+        }
       }
 
       .logo-Air2-line {
@@ -49,13 +56,13 @@
 
       .icon-container {
         position: absolute;
-        top: 170px;
-        width: 100%;
+        top: 150px;
+        width: 90%;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1;
-        flex-direction: row;
+        flex-direction: column;
         gap: 10px;
       }
 
@@ -71,11 +78,18 @@
         text-align: center;
       }
 
+      /* Responsividade do pop-up */
+      @media (min-width: 768px) {
+        .popup-text {
+          font-size: 2vw;
+        }
+      }
+
       .popup {
         position: fixed;
-        top: 45%;
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
         background-color: rgba(255, 255, 255, 0.9);
         padding: 15px;
         border-radius: 10px;
@@ -94,7 +108,7 @@
         width: 100%;
         bottom: 0;
         text-align: center;
-        font-size: 14px;
+        font-size: 12px;
       }
 
       footer img {
@@ -120,14 +134,14 @@
       /* Estilo para o botão de voltar */
       #backButton {
         position: fixed;
-        bottom: 50px;
+        bottom: 40px;
         right: 40px;
         background-color: #555;
         color: white;
         border: none;
         border-radius: 5px;
         padding: 10px 15px;
-        font-size: 14px;
+        font-size: 12px;
         cursor: pointer;
         opacity: 0.8;
         z-index: 10;
@@ -136,6 +150,64 @@
 
       #backButton:hover {
         opacity: 1;
+      }
+
+      /* Estilo para o botão de download */
+      #downloadButton {
+        position: fixed;
+        bottom: 100px;
+        right: 40px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 12px;
+        cursor: pointer;
+        opacity: 0.9;
+        z-index: 10;
+        transition: opacity 0.3s ease;
+      }
+
+      #downloadButton:hover {
+        opacity: 1;
+      }
+
+      /* Responsividade dos botões */
+      @media (min-width: 768px) {
+        #backButton,
+        #downloadButton {
+          font-size: 14px;
+          padding: 12px 18px;
+        }
+      }
+
+      /* Media queries para tablets e desktops */
+      @media (min-width: 768px) {
+        .icon-container {
+          flex-direction: row;
+          top: 200px;
+          gap: 20px;
+        }
+
+        .popup {
+          padding: 20px;
+          font-size: 1.2vw;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        h1 {
+          font-size: 2vw;
+        }
+
+        .popup-text {
+          font-size: 1.5vw;
+        }
+
+        footer {
+          font-size: 14px;
+        }
       }
     </style>
   </head>
@@ -210,7 +282,12 @@
 
     <!-- Botão de voltar -->
     <button id="backButton" onclick="window.location.href='https://memolocks.com/en/order-platform/'">
-      Back
+      Website
+    </button>
+
+    <!-- Botão de download do Datasheet -->
+    <button id="downloadButton" onclick="window.open('https://example.com/datasheet.pdf', '_blank')">
+      Download Datasheet
     </button>
 
     <!-- Rodapé -->
