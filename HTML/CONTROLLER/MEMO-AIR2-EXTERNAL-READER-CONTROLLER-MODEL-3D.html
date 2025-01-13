@@ -17,27 +17,35 @@
 
       /* Cabeçalho */
       header {
-        background-color: #ddc39a; /* Cor do cabeçalho */
+        background-color: #ddc39a;
         padding: 20px;
         text-align: center;
         width: 100%;
       }
 
       header img {
-        width: 80px; /* Ajuste o tamanho do logotipo para responsividade */
-        cursor: pointer; /* Para dar uma indicação de que é clicável */
+        width: 80px;
+        cursor: pointer;
         max-width: 100%;
       }
 
       h1 {
-        font-size: 4vw; /* Responsividade do título */
+        font-size: 6vw;
         color: #fff;
         margin-top: 10px;
       }
 
+      /* Responsividade do texto do cabeçalho */
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 3vw;
+        }
+      }
+
       .logo-Air2-line {
-        position: fixed; /* Fixado em relação à janela */
-        bottom: 50px; /* Distância do rodapé */
+        position: fixed;
+        bottom: 70px;
+        right: 80px;
         width: 100%;
         height: 15%;
         background-image: url("https://memolocks.com/wp-content/uploads/2024/08/aie2line-logo.svg");
@@ -47,48 +55,52 @@
         z-index: 1;
       }
 
-      /* Ícones e texto */
       .icon-container {
         position: absolute;
-        top: 170px;
-        width: 100%;
+        top: 150px;
+        width: 90%;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1;
-        flex-direction: row;
+        flex-direction: column;
         gap: 10px;
       }
 
       .icon-container img {
-        width: 50px; /* Ajuste o tamanho do ícone */
+        width: 50px;
         max-width: 100%;
       }
 
       .popup-text {
-        font-size: 4vw; /* Tornar o texto responsivo */
+        font-size: 4vw;
         color: black;
         font-weight: bold;
         text-align: center;
       }
 
-      /* Pop-up Modal Styles */
+      /* Responsividade do pop-up */
+      @media (min-width: 768px) {
+        .popup-text {
+          font-size: 2vw;
+        }
+      }
+
       .popup {
         position: fixed;
-        top: 45%;
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
         background-color: rgba(255, 255, 255, 0.9);
         padding: 15px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         z-index: 3;
         text-align: center;
-        display: block; /* Initially visible */
+        display: block;
         max-width: 90%;
       }
 
-      /* Rodapé */
       footer {
         background-color: #333;
         color: white;
@@ -97,7 +109,7 @@
         width: 100%;
         bottom: 0;
         text-align: center;
-        font-size: 14px;
+        font-size: 12px;
       }
 
       footer img {
@@ -119,6 +131,85 @@
         background-color: white;
         z-index: 0;
       }
+
+      /* Estilo para o botão de voltar */
+      #backButton {
+        position: fixed;
+        bottom: 60px;
+        right: 30px;
+        background-color: #555;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 12px;
+        cursor: pointer;
+        opacity: 0.8;
+        z-index: 10;
+        transition: opacity 0.3s ease;
+      }
+
+      #backButton:hover {
+        opacity: 1;
+      }
+
+      /* Estilo para o botão de download */
+      #downloadButton {
+        position: fixed;
+        bottom: 110px;
+        right: 30px;
+        background-color: #DDC39A;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 12px;
+        cursor: pointer;
+        opacity: 0.9;
+        z-index: 10;
+        transition: opacity 0.3s ease;
+      }
+
+      #downloadButton:hover {
+        opacity: 1;
+      }
+
+      /* Responsividade dos botões */
+      @media (min-width: 768px) {
+        #backButton,
+        #downloadButton {
+          font-size: 14px;
+          padding: 12px 18px;
+        }
+      }
+
+      /* Media queries para tablets e desktops */
+      @media (min-width: 768px) {
+        .icon-container {
+          flex-direction: row;
+          top: 200px;
+          gap: 20px;
+        }
+
+        .popup {
+          padding: 20px;
+          font-size: 1.2vw;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        h1 {
+          font-size: 2vw;
+        }
+
+        .popup-text {
+          font-size: 1.5vw;
+        }
+
+        footer {
+          font-size: 14px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -130,7 +221,7 @@
           alt="MemoLocks Logo"
         />
       </a>
-      <h1>AR2ONE 3D Model</h1>
+      <h1>AIR2ONE-3D Model</h1>
     </header>
 
     <!-- Logo -->
@@ -173,7 +264,7 @@
       <a-assets>
         <a-asset-item
           id="testModel"
-          src="https://memo-international.github.io/Augmented-Reality/air2-external-reader-controller-gbl.glb"
+          src="https://memo-international.github.io/VR/GBL/CONTROLLERS/air2-external-reader-controller-gbl.glb"
         ></a-asset-item>
       </a-assets>
 
@@ -181,7 +272,7 @@
       <a-entity
         gltf-model="#testModel"
         scale="40 40 40"
-        position="0 -1.5 -7"
+        position="0 -2 -9"
         play-all-model-animations=""
         look-controls
       ></a-entity>
@@ -190,20 +281,28 @@
       <a-entity camera></a-entity>
     </a-scene>
 
+    <!-- Botão de voltar -->
+    <button id="backButton" onclick="window.location.href='https://memolocks.com/en/order-platform/product/air2one-controller-with-integrated-reader/'">
+      Website
+    </button>
+
+    <!-- Botão de download do Datasheet -->
+    <button id="downloadButton" onclick="window.open('https://memolocks.com/wp-content/uploads/2024/11/MI-CON-0001I-AIR-EN-1.pdf', '_blank')">
+      Download Datasheet
+    </button>
+
     <!-- Rodapé -->
     <footer>
       <p>© 2024 MEMO International Ltd. All rights reserved.</p>
     </footer>
 
     <script>
-      // Esperar a página carregar
+      // Esconder o pop-up após 5 segundos
       window.onload = function () {
         const textElement = document.getElementById("popup");
-
-        // Definir um tempo limite para esconder o pop-up após 5 segundos
         setTimeout(() => {
-          textElement.style.display = "none"; // Esconder o pop-up após 5 segundos
-        }, 5000); // 5000ms = 5 segundos
+          textElement.style.display = "none";
+        }, 5000); // 5 segundos
       };
     </script>
   </body>
