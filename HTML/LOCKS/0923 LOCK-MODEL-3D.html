@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Memo International - Lock 0923 3D Model</title>
+    <title>Memo International - 0923 LOCK 3D Model</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <style>
       body {
@@ -30,14 +30,22 @@
       }
 
       h1 {
-        font-size: 4vw;
+        font-size: 6vw;
         color: #fff;
         margin-top: 10px;
       }
 
+      /* Responsividade do texto do cabeçalho */
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 3vw;
+        }
+      }
+
       .logo-Air2-line {
         position: fixed;
-        bottom: 50px;
+        bottom: 70px;
+        right: 80px;
         width: 100%;
         height: 15%;
         background-image: url("https://memolocks.com/wp-content/uploads/2024/08/aie2line-logo.svg");
@@ -49,13 +57,13 @@
 
       .icon-container {
         position: absolute;
-        top: 170px;
-        width: 100%;
+        top: 150px;
+        width: 90%;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1;
-        flex-direction: row;
+        flex-direction: column;
         gap: 10px;
       }
 
@@ -71,11 +79,18 @@
         text-align: center;
       }
 
+      /* Responsividade do pop-up */
+      @media (min-width: 768px) {
+        .popup-text {
+          font-size: 2vw;
+        }
+      }
+
       .popup {
         position: fixed;
-        top: 45%;
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
         background-color: rgba(255, 255, 255, 0.9);
         padding: 15px;
         border-radius: 10px;
@@ -94,7 +109,7 @@
         width: 100%;
         bottom: 0;
         text-align: center;
-        font-size: 14px;
+        font-size: 12px;
       }
 
       footer img {
@@ -120,14 +135,14 @@
       /* Estilo para o botão de voltar */
       #backButton {
         position: fixed;
-        bottom: 50px;
-        right: 40px;
+        bottom: 60px;
+        right: 30px;
         background-color: #555;
         color: white;
         border: none;
         border-radius: 5px;
         padding: 10px 15px;
-        font-size: 14px;
+        font-size: 12px;
         cursor: pointer;
         opacity: 0.8;
         z-index: 10;
@@ -136,6 +151,64 @@
 
       #backButton:hover {
         opacity: 1;
+      }
+
+      /* Estilo para o botão de download */
+      #downloadButton {
+        position: fixed;
+        bottom: 110px;
+        right: 30px;
+        background-color: #DDC39A;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 12px;
+        cursor: pointer;
+        opacity: 0.9;
+        z-index: 10;
+        transition: opacity 0.3s ease;
+      }
+
+      #downloadButton:hover {
+        opacity: 1;
+      }
+
+      /* Responsividade dos botões */
+      @media (min-width: 768px) {
+        #backButton,
+        #downloadButton {
+          font-size: 14px;
+          padding: 12px 18px;
+        }
+      }
+
+      /* Media queries para tablets e desktops */
+      @media (min-width: 768px) {
+        .icon-container {
+          flex-direction: row;
+          top: 200px;
+          gap: 20px;
+        }
+
+        .popup {
+          padding: 20px;
+          font-size: 1.2vw;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        h1 {
+          font-size: 2vw;
+        }
+
+        .popup-text {
+          font-size: 1.5vw;
+        }
+
+        footer {
+          font-size: 14px;
+        }
       }
     </style>
   </head>
@@ -148,7 +221,7 @@
           alt="MemoLocks Logo"
         />
       </a>
-      <h1>Lock 0923-3D Model</h1>
+      <h1>0923 LOCK-3D Model</h1>
     </header>
 
     <!-- Logo -->
@@ -157,7 +230,7 @@
     <!-- Icone com texto ao lado -->
     <div class="icon-container">
       <img
-        src="https://memo-international.github.io/Augmented-Reality/3d-modeling.png"
+        src="https://memo-international.github.io/VR/img/3d-modeling.png"
         alt="Icon"
       />
       <div class="popup-text">Move your phone 360°</div>
@@ -191,7 +264,7 @@
       <a-assets>
         <a-asset-item
           id="testModel"
-          src="https://memo-international.github.io/Augmented-Reality/0923 Lock-gbl.glb"
+          src="https://memo-international.github.io/VR/GBL/LOCKS/0923 Lock-gbl.glb"
         ></a-asset-item>
       </a-assets>
 
@@ -199,7 +272,7 @@
       <a-entity
         gltf-model="#testModel"
         scale="40 40 40"
-        position="0.5 -1.5 -11"
+        position="0 -1.5 -10"
         play-all-model-animations=""
         look-controls
       ></a-entity>
@@ -209,8 +282,13 @@
     </a-scene>
 
     <!-- Botão de voltar -->
-    <button id="backButton" onclick="window.location.href='https://memolocks.com/en/order-platform/'">
-      Back
+    <button id="backButton" onclick="window.location.href='https://memolocks.com/en/order-platform/product/air2-line-controller-air2mini-with-external-reader/'">
+      Website
+    </button>
+
+    <!-- Botão de download do Datasheet -->
+    <button id="downloadButton" onclick="window.open('https://memolocks.com/wp-content/uploads/2024/11/MI-CON-0001-AIRMIN-EN.pdf', '_blank')">
+      Download Datasheet
     </button>
 
     <!-- Rodapé -->
