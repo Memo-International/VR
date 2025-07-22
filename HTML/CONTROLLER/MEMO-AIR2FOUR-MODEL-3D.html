@@ -268,12 +268,16 @@ vr-mode-ui="enabled: false;
                 position="2 4 1"></a-entity>
 
       <!-- Modelo 3D -->
-<!-- Entidade Pai com rotação -->
 <a-entity rotation="0 -90 0" position="0 -1 -7">
   <a-entity
     gltf-model="#testModel"
     scale="25 25 25"
     play-all-model-animations
+    look-controls
+    shadow="cast: true; receive: true"
+  ></a-entity>
+</a-entity>
+    
     shadow="cast: true; receive: true"
   ></a-entity>
 </a-entity>
