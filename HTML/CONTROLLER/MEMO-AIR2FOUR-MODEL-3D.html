@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memo International - AIR2FOUR 3D Model</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
       body {
         margin: 0;
@@ -15,7 +15,6 @@
         align-items: center;
       }
 
-      /* Cabeçalho */
       header {
         background-color: #ddc39a;
         padding: 20px;
@@ -35,7 +34,6 @@
         margin-top: 10px;
       }
 
-      /* Responsividade do texto do cabeçalho */
       @media (min-width: 768px) {
         h1 {
           font-size: 3vw;
@@ -79,7 +77,6 @@
         text-align: center;
       }
 
-      /* Responsividade do pop-up */
       @media (min-width: 768px) {
         .popup-text {
           font-size: 2vw;
@@ -112,27 +109,12 @@
         font-size: 12px;
       }
 
-      footer img {
-        width: 50px;
-      }
-
-      footer p {
-        margin: 0;
-      }
-
       .logo-link {
         position: absolute;
         width: 100%;
         height: 15%;
       }
 
-      a-scene {
-        flex-grow: 1;
-        background-color: white;
-        z-index: 0;
-      }
-
-      /* Estilo para o botão de voltar */
       #backButton {
         position: fixed;
         bottom: 60px;
@@ -153,7 +135,6 @@
         opacity: 1;
       }
 
-      /* Estilo para o botão de download */
       #downloadButton {
         position: fixed;
         bottom: 110px;
@@ -174,17 +155,13 @@
         opacity: 1;
       }
 
-      /* Responsividade dos botões */
       @media (min-width: 768px) {
         #backButton,
         #downloadButton {
           font-size: 14px;
           padding: 12px 18px;
         }
-      }
 
-      /* Media queries para tablets e desktops */
-      @media (min-width: 768px) {
         .icon-container {
           flex-direction: row;
           top: 200px;
@@ -210,10 +187,37 @@
           font-size: 14px;
         }
       }
+
+      /* Hotspot Style */
+      .hotspot {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        font-size: 14px;
+        border: 2px solid #DDC39A;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      /* Tooltip Style */
+      #tooltip {
+        display: none;
+        position: fixed;
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 5px 8px;
+        border-radius: 4px;
+        font-size: 13px;
+        pointer-events: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        z-index: 9999;
+      }
     </style>
   </head>
   <body>
-    <!-- Cabeçalho -->
     <header>
       <a href="https://memolocks.com/en/" target="_blank">
         <img
@@ -224,86 +228,88 @@
       <h1>AIR2FOUR-3D Model</h1>
     </header>
 
-    <!-- Logo -->
     <div class="logo-Air2-line"></div>
 
-    <!-- Icone com texto ao lado -->
     <div class="icon-container">
       <img
         src="https://memo-international.github.io/VR/img/3d-modeling.png"
         alt="Icon"
       />
-      <div class="popup-text">Move your phone 360°</div>
+       <div class="popup-text">Move your phone 360°</div>
     </div>
 
-    <!-- Pop-up Modal -->
-    <div class="popup" id="popup">
+   <!-- <div class="popup" id="popup">
       <div>
         Interact with the 3D Model:
         <br />Mobile: Move your device 360°. / Touch: Use gestures to rotate.
-      </div>
+      </div> -->
     </div>
 
-    <!-- Info Icon -->
-    <div class="info-icon"></div>
-
-    <!-- Logo -->
-    <a
-      href="https://memolocks.com/en/"
-      class="logo-link"
-      style="bottom: 50px"
-      target="_blank"
-      title="Visit MemoLocks"
+    <!-- Novo Model Viewer -->
+    <model-viewer
+      src="https://memo-international.github.io/VR/GBL/CONTROLLERS/AIR2FOUR-Color-v2.glb"
+      alt="Locks1051"
+      auto-rotate
+      camera-controls
+      ar
+      shadow-intensity="0.5"
+      camera-orbit="90deg 90deg 15m"
+      scale="1 1 1"
+      style="width: 100%; height: 600px;"
     >
-      <div class="logo-Memo"></div>
-    </a>
+      <!-- Hotspots -->
+      <div class="hotspot" slot="hotspot-1" data-position="0.010 0.053 -0.077" data-normal="0 0 1" data-label="LED Power">1</div>
+      <div class="hotspot" slot="hotspot-2" data-position="0.020 0.068 -0.045" data-normal="0 0 1" data-label="Activate Button">2</div>
+      <div class="hotspot" slot="hotspot-3" data-position="0 -0.010 0" data-normal="0 0 1" data-label="Reader Connection 1, 2, 3, and 4">3</div>
+      <div class="hotspot" slot="hotspot-4" data-position="0.010 0.053 0.090" data-normal="0 0 1" data-label="Power Supply Connection">4</div>
+      <div class="hotspot" slot="hotspot-5" data-position="0 0.080 0.0029" data-normal="0 0 1" data-label="Lock Connection 1, 2, 3, and 4">5</div>
+    </model-viewer>
 
-    <!-- A-Frame Scene -->
-    <a-scene vr-mode-ui="enabled: false;">
-      <!-- Carregar o modelo 3D -->
-      <a-assets>
-        <a-asset-item
-          id="testModel"
-          src="https://memo-international.github.io/VR/GBL/CONTROLLERS/AIR2FOUR-Color-v2.glb"
-        ></a-asset-item>
-      </a-assets>
+    <!-- Tooltip -->
+    <div id="tooltip"></div>
 
-      <!-- Exibir o modelo 3D -->
-      <a-entity
-        gltf-model="#testModel"
-        scale="40 40 40"
-        position="0 -2 -7"
-        play-all-model-animations=""
-        look-controls
-      ></a-entity>
-
-      <!-- Câmera com controles de movimento -->
-      <a-entity camera></a-entity>
-    </a-scene>
-
-    <!-- Botão de voltar -->
     <button id="backButton" onclick="window.location.href='https://memolocks.com/en/order-platform/product/air2-line-controller-air2-four-with-external-reader/'">
       Website
     </button>
 
-    <!-- Botão de download do Datasheet -->
     <button id="downloadButton" onclick="window.open('https://memolocks.com/wp-content/uploads/2024/11/MI-CON-0004E-AIR-EN-1.pdf', '_blank')">
       Download Datasheet
     </button>
 
-    <!-- Rodapé -->
     <footer>
       <p>© 2024 MEMO International Ltd. All rights reserved.</p>
     </footer>
 
     <script>
-      // Esconder o pop-up após 5 segundos
+      // Esconder pop-up após 5 segundos
       window.onload = function () {
         const textElement = document.getElementById("popup");
         setTimeout(() => {
           textElement.style.display = "none";
-        }, 5000); // 5 segundos
+        }, 5000);
       };
+
+      // Tooltip dos hotspots
+      document.addEventListener('DOMContentLoaded', () => {
+        const tooltip = document.getElementById('tooltip');
+        const hotspots = document.querySelectorAll('.hotspot');
+
+        hotspots.forEach(hotspot => {
+          hotspot.addEventListener('mouseenter', () => {
+            tooltip.innerText = hotspot.getAttribute('data-label');
+            tooltip.style.display = 'block';
+          });
+
+          hotspot.addEventListener('mousemove', (e) => {
+            tooltip.style.left = (e.clientX + 10) + 'px';
+            tooltip.style.top = (e.clientY + 10) + 'px';
+          });
+
+          hotspot.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+          });
+        });
+      });
     </script>
   </body>
 </html>
