@@ -18,22 +18,29 @@
 
     h1 {
       margin-bottom: 20px;
+      text-align: center;
     }
 
+    /* Model Viewer Responsivo */
     model-viewer {
-      width: 600px;
-      height: 400px;
+      width: 100%;
+      max-width: 900px; /* limite máximo para desktop */
+      height: 60vw; /* altura proporcional à largura da tela */
+      max-height: 600px; /* limite máximo de altura */
       border-radius: 12px;
       background-color: transparent;
     }
 
+    /* Botões */
     .buttons {
       position: relative;
       width: 100%;
       display: flex;
-      justify-content: center; /* centraliza os botões */
+      justify-content: center;
+      flex-wrap: wrap; /* quebra linha no mobile */
       align-items: center;
       margin-top: 10px; /* distância do model-viewer */
+      gap: 10px;
     }
 
     .buttons button {
@@ -45,16 +52,29 @@
       cursor: pointer;
       font-size: 14px;
       transition: background 0.2s;
-      margin: 0 5px; /* espaçamento entre os botões */
     }
 
     .buttons button:hover {
       background: #ddc39a;
       color: #000;
     }
+
+    /* Ajustes para mobile */
+    @media (max-width: 600px) {
+      model-viewer {
+        height: 80vw; /* modelo ocupa mais da tela em mobile */
+      }
+
+      .buttons button {
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 <body>
+
+<h1>3D Drawer Showcase</h1>
 
 <model-viewer
   id="viewer"
@@ -66,70 +86,38 @@
   shadow-intensity="0.1"
   camera-orbit="45deg 75deg 20m"
   scale="1 1 1"
-  background-color="transparent"
-  style="width:600px; height:400px; ">
+  background-color="transparent">
 </model-viewer>
 
-<!-- Container dos botões logo abaixo do model-viewer -->
+<!-- Container dos botões -->
 <div class="buttons" id="animation-buttons"></div>
 
-<style>
-.buttons {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center; /* centraliza os botões */
-  align-items: center;
-  margin-top: 00px; /* distância pequena do model-viewer */
-}
-
-.buttons button {
-  background: #292F3D;
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s;
-  margin: 0 5px; /* espaçamento entre os botões */
-}
-
-.buttons button:hover {
-  background: #ddc39a;
-  color: #000;
-}
-</style>
-
 <script type="module">
-const viewer = document.getElementById('viewer');
-const buttonsContainer = document.getElementById('animation-buttons');
+  const viewer = document.getElementById('viewer');
+  const buttonsContainer = document.getElementById('animation-buttons');
 
-// Configuração de nomes dos botões
-const buttonConfig = [
-  { name: "Open Drawer 1" },
-  { name: "Open Drawer 2" },
-  { name: "Open Door" }
-];
+  // Nomes dos botões
+  const buttonConfig = [
+    { name: "Open Drawer 1" },
+    { name: "Open Drawer 2" },
+    { name: "Open Door" }
+  ];
 
-// Cria os botões imediatamente
-buttonConfig.forEach((config, index) => {
-  const btn = document.createElement('button');
-  btn.innerText = config.name;
+  // Cria os botões
+  buttonConfig.forEach((config, index) => {
+    const btn = document.createElement('button');
+    btn.innerText = config.name;
 
-  btn.addEventListener('click', () => {
-    // Toca animação correspondente, se existir
-    if(viewer.availableAnimations && viewer.availableAnimations[index]){
-      viewer.animationName = viewer.availableAnimations[index];
-      viewer.play();
-    }
+    btn.addEventListener('click', () => {
+      if(viewer.availableAnimations && viewer.availableAnimations[index]){
+        viewer.animationName = viewer.availableAnimations[index];
+        viewer.play();
+      }
+    });
+
+    buttonsContainer.appendChild(btn);
   });
-
-  buttonsContainer.appendChild(btn);
-});
 </script>
+
 </body>
 </html>
-
-
-
