@@ -20,17 +20,19 @@
     model-viewer {
       width: 100%;
       max-width: 600px;
-      height: 400px;
+      height: 300px; /* tamanho que você pediu */
       border-radius: 12px;
       background-color: transparent;
     }
 
     .buttons {
-      margin-top: 15px;
+      position: relative; 
+      width: 100%;
       display: flex;
+      justify-content: center; 
       flex-wrap: wrap;
       gap: 10px;
-      justify-content: center;
+      margin-top: 15px;
     }
 
     .buttons button {
@@ -42,6 +44,7 @@
       cursor: pointer;
       font-size: 14px;
       transition: background 0.2s;
+      position: absolute;
     }
 
     .buttons button:hover {
@@ -85,11 +88,11 @@
   src="https://memo-international.github.io/VR/Drawer%20Showcase-move-3.glb"
   alt="MI-MMV1-0020-12M"
   camera-controls
-  autoplay
   ar
   shadow-intensity="0.1"
-  camera-orbit="45deg 75deg 50m"
-  scale="1 1 1">
+  camera-orbit="45deg 75deg 10m"
+  scale="1 1 1"
+  style="width:100%; height:300px;">
 </model-viewer>
 
 <!-- Container para os botões -->
@@ -123,19 +126,32 @@
     const viewer = document.getElementById('viewer');
     const buttonsContainer = document.getElementById('animation-buttons');
 
+    // Configuração de nomes e posições (edite como quiser)
+    const buttonConfig = [
+      { name: "Drawer 1", top: "0px", left: "40%" },
+      { name: "Drawer 2", top: " 0px", left: "50%" },
+      { name: "Door 2", top: " 0px", left: "60%" },
+    ];
+
     viewer.addEventListener('load', () => {
       const animations = viewer.availableAnimations;
       console.log('Animations found:', animations);
 
-      // Criar botão para cada animação
       animations.forEach((animName, index) => {
         const btn = document.createElement('button');
-        btn.innerText = `Animation ${index + 1}`; // você pode personalizar os nomes
-        btn.title = animName; // mostra o nome real da animação como tooltip
+
+        const config = buttonConfig[index] || { name: `Animation ${index+1}`, top: "0px", left: "50%" };
+        btn.innerText = config.name;
+        btn.style.top = config.top;
+        btn.style.left = config.left;
+        btn.style.transform = "translateX(-50%)";
+
+        btn.title = animName;
         btn.addEventListener('click', () => {
           viewer.animationName = animName;
           viewer.play();
         });
+
         buttonsContainer.appendChild(btn);
       });
     });
