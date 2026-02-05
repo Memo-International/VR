@@ -16,7 +16,7 @@
       color: #333;
     }
 
-    h1, p. {
+    h1, p {
       margin-bottom: 20px;
       text-align: center;
     }
@@ -74,54 +74,83 @@
 </head>
 <body>
 
-<h1>3D Drawer Showcase</h1>
+<h2>3D Drawer Showcase</h2>
   <p>Press the buttons to open the drawers and doors</p>
 
 <model-viewer
   id="viewer"
   src="https://memo-international.github.io/VR/Drawer%20Showcase-move-3.glb"
-  alt="3D Drawer"
+  alt="MI-MMV1-0020-12M"
   camera-controls
-  autoplay
   ar
   shadow-intensity="0.1"
-  camera-orbit="45deg 75deg 30m"
+  camera-orbit="45deg 75deg 10m"
   scale="1 1 1"
-  background-color="transparent">
+  style="width:100%; height:300px;">
 </model-viewer>
 
-<!-- Container dos botões -->
+<!-- Container para os botões -->
 <div class="buttons" id="animation-buttons"></div>
 
-<script type="module">
-  const viewer = document.getElementById('viewer');
-  const buttonsContainer = document.getElementById('animation-buttons');
+<!-- Tooltip flutuante -->
+<div id="tooltip"></div>
 
-  // Nomes dos botões
-  const buttonConfig = [
-    { name: "Open Drawer 1" },
-    { name: "Open Drawer 2" },
-    { name: "Open Door" }
-  ];
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tooltip = document.getElementById('tooltip');
+    const hotspots = document.querySelectorAll('.hotspot');
 
-  // Cria os botões
-  buttonConfig.forEach((config, index) => {
-    const btn = document.createElement('button');
-    btn.innerText = config.name;
+    hotspots.forEach(hotspot => {
+      hotspot.addEventListener('mouseenter', () => {
+        tooltip.innerText = hotspot.getAttribute('data-label');
+        tooltip.style.display = 'block';
+      });
 
-    btn.addEventListener('click', () => {
-      if(viewer.availableAnimations && viewer.availableAnimations[index]){
-        viewer.animationName = viewer.availableAnimations[index];
-        viewer.play();
-      }
+      hotspot.addEventListener('mousemove', (e) => {
+        tooltip.style.left = (e.clientX + 10) + 'px';
+        tooltip.style.top = (e.clientY + 10) + 'px';
+      });
+
+      hotspot.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+      });
     });
 
-    buttonsContainer.appendChild(btn);
+    // --- Botões de animação ---
+    const viewer = document.getElementById('viewer');
+    const buttonsContainer = document.getElementById('animation-buttons');
+
+    // Configuração de nomes e posições (edite como quiser)
+    const buttonConfig = [
+      { name: "Drawer 1", top: "0px", left: "40%" },
+      { name: "Drawer 2", top: " 0px", left: "50%" },
+      { name: "Door 2", top: " 0px", left: "60%" },
+    ];
+
+    viewer.addEventListener('load', () => {
+      const animations = viewer.availableAnimations;
+      console.log('Animations found:', animations);
+
+      animations.forEach((animName, index) => {
+        const btn = document.createElement('button');
+
+        const config = buttonConfig[index] || { name: `Animation ${index+1}`, top: "0px", left: "50%" };
+        btn.innerText = config.name;
+        btn.style.top = config.top;
+        btn.style.left = config.left;
+        btn.style.transform = "translateX(-50%)";
+
+        btn.title = animName;
+        btn.addEventListener('click', () => {
+          viewer.animationName = animName;
+          viewer.play();
+        });
+
+        buttonsContainer.appendChild(btn);
+      });
+    });
   });
 </script>
 
 </body>
 </html>
-
-
-
