@@ -56,8 +56,6 @@
 </head>
 <body>
 
-<h1>3D Drawer Showcase</h1>
-
 <model-viewer
   id="viewer"
   src="https://memo-international.github.io/VR/Drawer%20Showcase-move-3.glb"
@@ -68,41 +66,70 @@
   shadow-intensity="0.1"
   camera-orbit="45deg 75deg 20m"
   scale="1 1 1"
-  background-color="transparent">
+  background-color="transparent"
+  style="width:600px; height:400px; ">
 </model-viewer>
 
-<!-- Container dos botões -->
+<!-- Container dos botões logo abaixo do model-viewer -->
 <div class="buttons" id="animation-buttons"></div>
 
+<style>
+.buttons {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centraliza os botões */
+  align-items: center;
+  margin-top: 00px; /* distância pequena do model-viewer */
+}
+
+.buttons button {
+  background: #292F3D;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+  margin: 0 5px; /* espaçamento entre os botões */
+}
+
+.buttons button:hover {
+  background: #ddc39a;
+  color: #000;
+}
+</style>
+
 <script type="module">
-  const viewer = document.getElementById('viewer');
-  const buttonsContainer = document.getElementById('animation-buttons');
+const viewer = document.getElementById('viewer');
+const buttonsContainer = document.getElementById('animation-buttons');
 
-  // Configuração de nomes dos botões
-  const buttonConfig = [
-    { name: "Drawer 1" },
-    { name: "Drawer 2" },
-    { name: "Open Door" }
-  ];
+// Configuração de nomes dos botões
+const buttonConfig = [
+  { name: "Open Drawer 1" },
+  { name: "Open Drawer 2" },
+  { name: "Open Door" }
+];
 
-  // Cria os botões imediatamente
-  buttonConfig.forEach((config, index) => {
-    const btn = document.createElement('button');
-    btn.innerText = config.name;
+// Cria os botões imediatamente
+buttonConfig.forEach((config, index) => {
+  const btn = document.createElement('button');
+  btn.innerText = config.name;
 
-    btn.addEventListener('click', () => {
-      // Toca animação correspondente, se existir
-      if(viewer.availableAnimations && viewer.availableAnimations[index]){
-        viewer.animationName = viewer.availableAnimations[index];
-        viewer.play();
-      }
-    });
-
-    buttonsContainer.appendChild(btn);
+  btn.addEventListener('click', () => {
+    // Toca animação correspondente, se existir
+    if(viewer.availableAnimations && viewer.availableAnimations[index]){
+      viewer.animationName = viewer.availableAnimations[index];
+      viewer.play();
+    }
   });
-</script>
 
+  buttonsContainer.appendChild(btn);
+});
+</script>
 </body>
 </html>
+
 
 
